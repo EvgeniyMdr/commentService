@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  commentservice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "44030:44030"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - GRPC_HOST=${GRPC_HOST}
+      - GRPC_PORT=${GRPC_PORT}
+      - GRPC_TIMEOUT=${GRPC_TIMEOUT}
+    depends_on:
+      - postgresdb
+
+  postgresdb:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
