@@ -18,20 +18,14 @@ func New() *App {
 	mainConfig := config.NewServiceConfig()
 	database, err := db.ConnectToDB(mainConfig.GetDbSettings())
 
-	//TODO: инициализация логгера
-
 	if err != nil {
-		fmt.Errorf("error: %w", err)
+		_ = fmt.Errorf("error: %w", err)
 	}
-	//TODO: Запусьть grpc приложение
 
 	commentsRepo := repositories.NewCommentsRepository(database)
 
 	commentsService := services.NewCommentsService(commentsRepo)
 
-	fmt.Printf("%v", commentsService)
-
-	// Инициализация gRPC сервера
 	grpcApp := grpcapp.New(commentsService)
 
 	if err != nil {

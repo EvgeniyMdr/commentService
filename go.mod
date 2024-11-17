@@ -5,7 +5,6 @@ go 1.22.9
 require (
 	github.com/EvgeniyMdr/protos v0.0.12
 	github.com/google/uuid v1.6.0
-	github.com/gorilla/mux v1.8.1
 	github.com/lib/pq v1.10.9
 	google.golang.org/grpc v1.68.0
 )

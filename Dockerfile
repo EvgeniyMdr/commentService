@@ -6,7 +6,7 @@ WORKDIR /build
 
 # Копируем файлы модулей и устанавливаем зависимости
 COPY go.mod go.sum ./
-RUN go mod download
+RUN go mod tidy
 
 # Копируем все исходные файлы проекта в рабочую директорию
 COPY . .
@@ -23,8 +23,8 @@ WORKDIR /app
 # Копируем скомпилированный бинарник из builder
 COPY --from=builder /build/commentservice .
 
-# Экспонируем порты для HTTP сервера
-EXPOSE 8081
+## Экспонируем порты для GRPC сервера
+EXPOSE ${GRPC_PORT}
 
 # Запускаем приложение
 CMD ["./commentservice"]

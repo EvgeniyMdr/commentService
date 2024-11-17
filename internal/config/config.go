@@ -1,6 +1,7 @@
 package config
 
 import (
+	_ "github.com/kelseyhightower/envconfig"
 	"os"
 )
 
