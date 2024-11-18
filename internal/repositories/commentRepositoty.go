@@ -2,13 +2,13 @@ package repositories
 
 import (
 	"context"
-	"github.com/google/uuid"
+	commentsv1 "github.com/EvgeniyMdr/protos/gen/go/comments"
 )
 
 type Repo interface {
-	CreateComment(ctx context.Context) error
-	GetComments(ctx context.Context, id uuid.UUID) error
-	GetChildComments(ctx context.Context) error
-	DeleteComment(ctx context.Context, id uuid.UUID) (*bool, error)
-	UpdateComment(ctx context.Context, id uuid.UUID) error
+	CreateComment(ctx context.Context, comDto commentsv1.CommentDto) (commentsv1.CommentDto, error)
+	GetComments(ctx context.Context, req commentsv1.GetCommentsDto) ([]commentsv1.CommentDto, error)
+	GetChildComments(ctx context.Context, req commentsv1.GetChildCommentsDto) ([]commentsv1.CommentDto, error)
+	DeleteComment(ctx context.Context, dto commentsv1.DeleteCommentDto) (*bool, error)
+	UpdateComment(ctx context.Context, updDto commentsv1.UpdateCommentDto) (commentsv1.CommentDto, error)
 }

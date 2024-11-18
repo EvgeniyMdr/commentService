@@ -14,6 +14,9 @@ COPY . .
 # Собираем бинарный файл
 RUN go build -o commentservice ./cmd/commentservice/main.go
 
+# Собираем бинарный файл для миграций
+RUN go build -o goose-custom ./cmd/commentservice/main.go
+
 # Используем минимальный образ для запуска
 FROM alpine:3.18
 
@@ -22,6 +25,10 @@ WORKDIR /app
 
 # Копируем скомпилированный бинарник из builder
 COPY --from=builder /build/commentservice .
+COPY --from=builder /build/goose-custom .
+
+# Копируем директорию с миграциями в контейнер
+COPY ./internal/db/migrations /app/db/migrations
 
 ## Экспонируем порты для GRPC сервера
 EXPOSE ${GRPC_PORT}
