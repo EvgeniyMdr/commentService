@@ -14,27 +14,27 @@ type commentsRepository struct {
 	db *sql.DB
 }
 
-func (c commentsRepository) CreateComment(ctx context.Context, comDto commentsv1.CommentDto) (commentsv1.CommentDto, error) {
+func (c commentsRepository) CreateComment(ctx context.Context, comDto *commentsv1.CommentDto) (*commentsv1.CommentDto, error) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (c commentsRepository) GetComments(ctx context.Context, req commentsv1.GetCommentsDto) ([]commentsv1.CommentDto, error) {
+func (c commentsRepository) GetComments(ctx context.Context, req *commentsv1.GetCommentsDto) (*commentsv1.CommentsResponse, error) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (c commentsRepository) GetChildComments(ctx context.Context, req commentsv1.GetChildCommentsDto) ([]commentsv1.CommentDto, error) {
+func (c commentsRepository) GetChildComments(ctx context.Context, req *commentsv1.GetChildCommentsDto) (*commentsv1.CommentsResponse, error) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (c commentsRepository) DeleteComment(ctx context.Context, dto commentsv1.DeleteCommentDto) (*bool, error) {
+func (c commentsRepository) DeleteComment(ctx context.Context, dto *commentsv1.DeleteCommentDto) (*commentsv1.DeleteCommentResponse, error) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (c commentsRepository) UpdateComment(ctx context.Context, updDto commentsv1.UpdateCommentDto) (commentsv1.CommentDto, error) {
+func (c commentsRepository) UpdateComment(ctx context.Context, updDto *commentsv1.UpdateCommentDto) (*commentsv1.CommentDto, error) {
 	//TODO implement me
 	panic("implement me")
 }
