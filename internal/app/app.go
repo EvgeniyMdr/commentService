@@ -1,6 +1,7 @@
 package app
 
 import (
+	"database/sql"
 	"fmt"
 	grpcapp "github.com/EvgeniyMdr/commentService/internal/app/grpc"
 	"github.com/EvgeniyMdr/commentService/internal/config"
@@ -12,11 +13,14 @@ import (
 
 type App struct {
 	GRPCSrv *grpcapp.App
+	Db      *sql.DB
 }
 
 func New() *App {
 	mainConfig := config.NewServiceConfig()
 	database, err := db.ConnectToDB(mainConfig.GetDbSettings())
+
+	log.Printf("DB Ping successful. DB Stats: %+v\n", database.Stats())
 
 	if err != nil {
 		_ = fmt.Errorf("error: %w", err)
@@ -32,11 +36,15 @@ func New() *App {
 		log.Fatalf("Ошибка подключения к базе данных: %v", err)
 	}
 
+	return &App{GRPCSrv: grpcApp, Db: database}
+}
+
+// TODO: Выяснить правильно ли я делаю стоп
+func (a App) Stop() {
 	defer func() {
-		if err := database.Close(); err != nil {
+		log.Printf("DB Close deffer successful.")
+		if err := a.Db.Close(); err != nil {
 			log.Fatalf("Ошибка закрытия соединения с базой данных: %v", err)
 		}
 	}()
-
-	return &App{GRPCSrv: grpcApp}
 }

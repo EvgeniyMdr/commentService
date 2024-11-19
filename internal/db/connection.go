@@ -4,10 +4,9 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/EvgeniyMdr/commentService/internal/config"
+	_ "github.com/lib/pq"
 	"log"
 	"time"
-
-	_ "github.com/lib/pq"
 )
 
 func ConnectToDB(dbConfig config.DbConfig) (*sql.DB, error) {

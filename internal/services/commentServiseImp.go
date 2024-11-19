@@ -5,9 +5,7 @@ import (
 	"github.com/EvgeniyMdr/commentService/internal/repositories"
 	commentsv1 "github.com/EvgeniyMdr/protos/gen/go/comments"
 	"github.com/google/uuid"
-	"google.golang.org/protobuf/types/known/timestamppb"
 	"sync"
-	"time"
 )
 
 var once sync.Once
@@ -20,15 +18,11 @@ type commentsService struct {
 func (c commentsService) CreateComment(ctx context.Context, req *commentsv1.CreateCommentDto) (*commentsv1.CommentDto, error) {
 	comUuid := uuid.NewString()
 
-	nowTs := timestamppb.New(time.Now())
-
 	comment := &commentsv1.CommentDto{
 		Id:         comUuid,
 		PostId:     req.PostId,
 		AuthorId:   req.AuthorId,
 		Content:    req.Content,
-		CreatedAt:  nowTs,
-		UpdatedAt:  nowTs,
 		ParentId:   req.ParentId,
 		ChildCount: 0,
 	}

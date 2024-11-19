@@ -20,4 +20,5 @@ func main() {
 	<-stop
 
 	application.GRPCSrv.Stop()
+	application.Stop()
 }
