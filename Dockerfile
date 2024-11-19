@@ -11,6 +11,13 @@ RUN go mod tidy
 # Копируем все исходные файлы проекта в рабочую директорию
 COPY . .
 
+## Устанавливаем утилиту goose
+#RUN go install github.com/pressly/goose/v3/cmd/goose@latest
+#
+## Копируем миграции в контейнер
+#COPY internal/db/migrations /app/migrations
+
+
 # Собираем бинарный файл
 RUN go build -o commentservice ./cmd/commentservice/main.go
 

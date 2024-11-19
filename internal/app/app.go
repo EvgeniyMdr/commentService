@@ -8,7 +8,6 @@ import (
 	"github.com/EvgeniyMdr/commentService/internal/repositories"
 	"github.com/EvgeniyMdr/commentService/internal/services"
 	"log"
-	"os"
 )
 
 type App struct {
@@ -18,22 +17,9 @@ type App struct {
 func New() *App {
 	mainConfig := config.NewServiceConfig()
 	database, err := db.ConnectToDB(mainConfig.GetDbSettings())
-	migrationService := db.NewMigrationService(database)
 
 	if err != nil {
 		_ = fmt.Errorf("error: %w", err)
-	}
-
-	cwd, err := os.Getwd()
-	if err != nil {
-		log.Fatalf("Ошибка получения рабочей директории: %v", err)
-	}
-	log.Println("Текущая рабочая директория:", cwd)
-
-	err = migrationService.Up("/app/db/migrations")
-
-	if err != nil {
-		log.Fatalf("Ошибка миграции в базе данных: %v", err)
 	}
 
 	commentsRepo := repositories.NewCommentsRepository(database)
