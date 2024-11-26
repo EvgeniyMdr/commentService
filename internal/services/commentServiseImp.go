@@ -23,7 +23,7 @@ func (c commentsService) CreateComment(ctx context.Context, req *commentsv1.Crea
 		PostId:     req.PostId,
 		AuthorId:   req.AuthorId,
 		Content:    req.Content,
-		ParentId:   req.ParentId,
+		ParentId:   &req.ParentId,
 		ChildCount: 0,
 	}
 	comm, err := c.repo.CreateComment(ctx, comment)

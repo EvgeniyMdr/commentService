@@ -3,7 +3,7 @@ module github.com/EvgeniyMdr/commentService
 go 1.22.9
 
 require (
-	github.com/EvgeniyMdr/protos v0.0.12
+	github.com/EvgeniyMdr/protos v0.0.15
 	github.com/google/uuid v1.6.0
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/lib/pq v1.10.9
